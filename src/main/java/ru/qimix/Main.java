@@ -9,6 +9,9 @@ public class Main {
         for (int i = 0; i < 1000; i++) {
             new RouteMaker("RLRFR", 100).start();
         }
+        sizeToFreq.entrySet().stream()
+                .sorted(Map.Entry.<Integer, Integer>comparingByValue().reversed())
+                .forEach(System.out::println);
     }
 
     static class RouteMaker extends Thread {
