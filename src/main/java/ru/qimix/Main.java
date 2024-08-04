@@ -4,7 +4,6 @@ import java.util.*;
 
 public class Main {
     protected static final Map<Integer, Integer> sizeToFreq = Collections.synchronizedMap(new HashMap<>());
-    protected static final List<String> routeStore = Collections.synchronizedList(new ArrayList<>());
 
     public static void main(String[] args) {
         for (int i = 0; i < 1000; i++) {
@@ -29,11 +28,26 @@ public class Main {
         public String generateRoute(String letters, int length) {
             Random random = new Random();
             StringBuilder route = new StringBuilder();
+            int coutR = 0;
+
             for (int i = 0; i < length; i++) {
-                route.append(letters.charAt(random.nextInt(letters.length())));
-            }
-            synchronized (routeStore) {
-                routeStore.add(route.toString());
+                Character letter = letters.charAt(random.nextInt(letters.length()));
+                route.append(letter);
+                if (letter.equals('R')) {
+                    coutR++;
+                } else {
+                    if (coutR > 0) {
+                        synchronized (sizeToFreq) {
+                            if (!sizeToFreq.containsKey(coutR)) {
+                                sizeToFreq.put(coutR, 1);
+                            } else {
+                                int tmpFreq = sizeToFreq.get(coutR);
+                                sizeToFreq.put(coutR, tmpFreq + 1);
+                            }
+                        }
+                    }
+                    coutR = 0;
+                }
             }
             return route.toString();
         }
