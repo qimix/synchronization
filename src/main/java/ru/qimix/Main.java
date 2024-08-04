@@ -7,7 +7,7 @@ public class Main {
     public static List<String> routeStore = Collections.synchronizedList(new ArrayList<>());
 
     public static void main(String[] args) throws InterruptedException {
-        for(int i = 0; i < 1000; i++) {
+        for (int i = 0; i < 1000; i++) {
             new RouteMaker("RLRFR", 100).start();
         }
     }
@@ -16,13 +16,13 @@ public class Main {
         String letters;
         Integer length;
 
-        public RouteMaker(String letters, int length){
+        public RouteMaker(String letters, int length) {
             this.letters = letters;
             this.length = length;
         }
 
         @Override
-        public void run(){
+        public void run() {
             generateRoute(letters, length);
         }
 
@@ -37,6 +37,5 @@ public class Main {
             }
             return route.toString();
         }
-
     }
 }
