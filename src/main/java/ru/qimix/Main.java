@@ -9,12 +9,19 @@ public class Main {
         for (int i = 0; i < 1000; i++) {
             new RouteMaker("RLRFR", 100).start();
         }
-        int maxKey = sizeToFreq.entrySet().stream()
+        int minKey = sizeToFreq.entrySet().stream()
                 .sorted(Map.Entry.<Integer, Integer>comparingByValue().reversed()).findFirst().get().getKey();
-        int maxValue = sizeToFreq.entrySet().stream()
-                .sorted(Map.Entry.<Integer, Integer>comparingByValue().reversed()).findFirst().get().getValue();
+        int maxValue = sizeToFreq.get(minKey);
 
-        System.out.println("Самое частое количество повторений " + maxKey + " (встретилось " + maxValue + " раз)");
+        System.out.println("Самое частое количество повторений " + minKey + " (встретилось " + maxValue + " раз)");
+        System.out.println("Другие размеры:");
+        for (Map.Entry<Integer, Integer> map : sizeToFreq.entrySet()) {
+            int key = map.getKey();
+            if (!(key == minKey)) {
+                System.out.println("- " + map.getKey() + " (" + map.getValue() + " раз)");
+            }
+        }
+
     }
 
     static class RouteMaker extends Thread {
