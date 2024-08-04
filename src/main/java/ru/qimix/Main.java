@@ -8,19 +8,20 @@ public class Main {
 
     public static void main(String[] args) throws InterruptedException {
         for(int i = 0; i < 1000; i++) {
-            new Robot("RLRFR", 100).start();
+            new RouteMaker("RLRFR", 100).start();
         }
     }
 
-    static class Robot extends Thread {
+    static class RouteMaker extends Thread {
         String letters;
         Integer length;
 
-        public Robot(String letters, int length){
+        public RouteMaker(String letters, int length){
             this.letters = letters;
             this.length = length;
         }
 
+        @Override
         public void run(){
             generateRoute(letters, length);
         }
