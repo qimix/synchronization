@@ -3,10 +3,10 @@ package ru.qimix;
 import java.util.*;
 
 public class Main {
-    public static Map<Integer, Integer> sizeToFreq = Collections.synchronizedMap(new HashMap<>());
-    public static List<String> routeStore = Collections.synchronizedList(new ArrayList<>());
+    protected static final Map<Integer, Integer> sizeToFreq = Collections.synchronizedMap(new HashMap<>());
+    protected static final List<String> routeStore = Collections.synchronizedList(new ArrayList<>());
 
-    public static void main(String[] args) throws InterruptedException {
+    public static void main(String[] args) {
         for (int i = 0; i < 1000; i++) {
             new RouteMaker("RLRFR", 100).start();
         }
